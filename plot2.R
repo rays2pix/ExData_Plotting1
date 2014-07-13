@@ -1,0 +1,7 @@
+powerdata=read.table("household_power_consumption.txt",header=TRUE,nrows=70000,sep=";",stringsAsFactors=FALSE,colClasses=c(NA,NA,rep("numeric",7)),na.strings="?")
+plotdata = subset(powerdata,Date=="1/2/2007" | Date == "2/2/2007")
+plotdata$DateTime=paste(plotdata$Date,plotdata$Time)
+plotdata$DateTime =as.POSIXct(plotdata$DateTime,format="%d/%m/%Y %H:%M:%S")
+png("plot2.png", width=480, height=480, units="px")
+plot(plotdata$DateTime,plotdata$Global_active_power,xlab="",ylab="Global Active power(kilowatts)",col="black",type="l")
+dev.off()
